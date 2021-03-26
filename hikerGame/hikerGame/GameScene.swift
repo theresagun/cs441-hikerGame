@@ -14,16 +14,17 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
-   let motionManager = CMMotionManager()
+    var content = false
+    //motion manager for tilting the device
+    let motionManager = CMMotionManager()
 
     
-    var content = false
-    // 1
+    //trees begin moving to the right TODO delete
     var invaderMovementDirection: InvaderMovementDirection = .right
-    // 2
+    //trees didn't move yet so time == 0
     var timeOfLastMove: CFTimeInterval = 0.0
-    // 3
-    let timePerMove: CFTimeInterval = 1.0
+    //trees take one second per move
+    let timePerMove: CFTimeInterval = 0.5
 
     enum treeType {
         case live
@@ -35,17 +36,12 @@ class GameScene: SKScene {
             return "Tree"
         }
     }
-    
-    //how trees will be laid out (in a grid) TODO change this to say tree, or just remove if not needed
-    let kInvaderGridSpacing = CGSize(width: 12, height: 12)
-    let kInvaderRowCount = 6
-    let kInvaderColCount = 6
 
-    let kShipSize = CGSize(width: 50, height: 50)
-    let kShipName = "ship"
+    let kHikerSize = CGSize(width: 50, height: 50)
+    let kHikerName = "hiker"
     
-    let kScoreHudName = "scoreHud"
-    let kHealthHudName = "healthHud"
+    let kScoreName = "scoreLabel"
+    let kHealthName = "healthLabel"
 
     enum InvaderMovementDirection {
       case right
@@ -55,37 +51,20 @@ class GameScene: SKScene {
       case none
     }
 
-    
+    var viewTop: CGPoint!
+    var nodeTop: CGPoint!
+    var sceneTop: CGPoint!
+    var viewBottom: CGPoint!
+    var nodeBottom: CGPoint!
+    var sceneBottom: CGPoint!
 
     override func didMove(to view: SKView) {
-        
         if(!content){
             contentOnScreen()
             content = true
             motionManager.startAccelerometerUpdates()
 
         }
-        
-        //following is default from game tempplate
-//        // Get label node from scene and store it for use later
-//        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-//        if let label = self.label {
-//            label.alpha = 0.0
-//            label.run(SKAction.fadeIn(withDuration: 2.0))
-//        }
-//
-//        // Create shape node to use during mouse interaction
-//        let w = (self.size.width + self.size.height) * 0.05
-//        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-//
-//        if let spinnyNode = self.spinnyNode {
-//            spinnyNode.lineWidth = 2.5
-//
-//            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-//            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-//                                              SKAction.fadeOut(withDuration: 0.5),
-//                                              SKAction.removeFromParent()]))
-//        }
     }
     
     func contentOnScreen(){
@@ -96,12 +75,12 @@ class GameScene: SKScene {
 //        self.addChild(tree)
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
 
-        setupTrees()
-        setupShip()
-        setupHud()
+        createTrees()
+        placeHiker()
+        setupLabels()
 
         //make background a forest (set to image later??)
-        self.backgroundColor = SKColor.green
+        self.backgroundColor = SKColor.brown
     }
     
     func makeTree(ofType tType: treeType) -> SKNode {
@@ -116,102 +95,100 @@ class GameScene: SKScene {
 //      }
       
       // create a sprite (begins as a rectangle of specified color)
-        let tree = SKSpriteNode(color: SKColor.red, size: GameScene.treeType.size)
+        let tree = SKSpriteNode(color: SKColor.green, size: GameScene.treeType.size)
         //let tree = SKSpriteNode(imageNamed: "x")
-        
         tree.name = GameScene.treeType.name
       
       return tree
     }
 
-    //lay out trees in a grid
-    //rows % 3 are type a
-    func setupTrees() {
-      //decide base origin, which is where to start spawning
-        let baseOrigin = CGPoint(x: 0, y: 0)
-      for row in 0..<kInvaderRowCount {
-        //give tree types based on row
+    func createTrees() {
+      //decide base origin, which is where to start spawning TODO move this to be global?
+        self.viewTop = CGPoint(x:scene!.view!.center.x,y:scene!.view!.frame.minY)
+        self.sceneTop = scene!.view!.convert(viewTop, to:scene!)
+        self.nodeTop = scene!.convert(sceneTop,to:GameScene())
+        
+        let viewCorner = CGPoint(x:scene!.view!.frame.minX,y:scene!.view!.frame.minY)
+        let sceneCorner = scene!.view!.convert(viewCorner, to:scene!)
+        let nodeCorner = scene!.convert(sceneCorner,to:GameScene())
+        
+        let viewCorner2 = CGPoint(x:scene!.view!.frame.maxX,y:scene!.view!.frame.minY)
+        let sceneCorner2 = scene!.view!.convert(viewCorner2, to:scene!)
+        let nodeCorner2 = scene!.convert(sceneCorner2,to:GameScene())
+        
+        let baseOrigin = CGPoint(x: nodeCorner.x, y: self.nodeTop.y)
+        
         var tType: treeType
         
-        if row % 3 == 0 {
-          tType = .live
-        } else {
-          tType = .dead
-        }
-        
-        //position of first tree in this row
-        let invaderPositionY = CGFloat(row) * (GameScene.treeType.size.height * 2) + baseOrigin.y
-        
-        var invaderPosition = CGPoint(x: baseOrigin.x, y: invaderPositionY)
-        
-        //
-        for _ in 1..<kInvaderColCount {
-          //for each row/col create a tree and add to scene
+        //random num of trees every time they generate
+        let numTrees = Int.random(in: 1..<5)
+        for _ in 1 ... numTrees {
+            //randomly decide type of tree
+            if Bool.random(){
+                tType = .live
+            }
+            else{
+                tType = .dead
+            }
+            //TODO the trees will only generate on one side of the screen?
+            //place tree randomly along x axis at top of screen
+            let rand = Int.random(in: Int(nodeCorner.x) ... Int(nodeCorner2.x))
+            let treePosition = CGPoint(x: baseOrigin.x + CGFloat(rand), y: baseOrigin.y)
           let tree = makeTree(ofType: tType)
-          tree.position = invaderPosition
-          
+          tree.position = treePosition
           addChild(tree)
-          //update for the next tree
-          invaderPosition = CGPoint(
-            x: invaderPosition.x + GameScene.treeType.size.width + kInvaderGridSpacing.width,
-            y: invaderPositionY
-          )
         }
-      }
     }
 
-    func setupShip() {
+    func placeHiker() {
       //create a hiker
-      let ship = makeShip()
-      
-      //put the hiker on the screen
-        ship.position = CGPoint(x: -10, y: -10)
-      addChild(ship)
+      let hiker = makeHiker()
+        //get the x,y values for the bottom center of the screen
+        self.viewBottom = CGPoint(x:scene!.view!.center.x,y:scene!.view!.frame.maxY)
+        self.sceneBottom = scene!.view!.convert(self.viewBottom, to:scene!)
+        self.nodeBottom = scene!.convert(self.sceneBottom,to:GameScene())
+      //put the hiker here ish
+        hiker.position = CGPoint(x: self.nodeBottom.x, y: self.nodeBottom.y + 50)
+      addChild(hiker)
+        
     }
 
-    func makeShip() -> SKNode {
-      let ship = SKSpriteNode(color: SKColor.black, size: kShipSize)
-      ship.name = kShipName
-        
-        // 1
-        ship.physicsBody = SKPhysicsBody(rectangleOf: ship.frame.size)
-
-        // 2
-        ship.physicsBody!.isDynamic = true
-
-        // 3
-        ship.physicsBody!.affectedByGravity = false
-
-        // 4
-        ship.physicsBody!.mass = 0.02
-
-      return ship
+    func makeHiker() -> SKNode {
+      let hiker = SKSpriteNode(color: SKColor.black, size: kHikerSize)
+      hiker.name = kHikerName
+        //make a physics body the size of the hiker
+        hiker.physicsBody = SKPhysicsBody(rectangleOf: hiker.frame.size)
+        //dynamic makes collisions and other things possible
+        hiker.physicsBody!.isDynamic = true
+        //not affected by gravity so it doesn't change in y value
+        hiker.physicsBody!.affectedByGravity = false
+        //arbitrary mass so its movement is more natural
+        hiker.physicsBody!.mass = 0.02
+      return hiker
     }
     
-    func setupHud() {
+    func setupLabels() {
+//        let viewTop = CGPoint(x:scene!.view!.center.x,y:scene!.view!.frame.minY)
+//        let sceneTop = scene!.view!.convert(viewTop, to:scene!)
+//        let nodeTop = scene!.convert(sceneTop,to:GameScene())
       //create score label TODO maybe score is time survived?
       let scoreLabel = SKLabelNode(fontNamed: "Courier")
-      scoreLabel.name = kScoreHudName
+      scoreLabel.name = kScoreName
       scoreLabel.fontSize = 25
       scoreLabel.fontColor = SKColor.white
       scoreLabel.text = String(format: "Score: %04u", 0)
-      scoreLabel.position = CGPoint(x: 50, y: 50)
+        scoreLabel.position = CGPoint(x: self.nodeTop.x + 150, y: self.nodeTop.y-100)
       addChild(scoreLabel)
       
-      //same for health
+      //same for health TODO change health to hearts not %
       let healthLabel = SKLabelNode(fontNamed: "Courier")
-      healthLabel.name = kHealthHudName
+      healthLabel.name = kHealthName
       healthLabel.fontSize = 25
-      healthLabel.fontColor = SKColor.purple
+      healthLabel.fontColor = SKColor.white
       healthLabel.text = String(format: "Health: %.1f%%", 100.0)
-      healthLabel.position = CGPoint(
-        x: frame.size.width / 2,
-        y: size.height - (80 + healthLabel.frame.size.height/2)
-      )
+        healthLabel.position = CGPoint(x: self.nodeTop.x - 150, y: self.nodeTop.y-100)
       addChild(healthLabel)
     }
-
-
     
     func touchDown(atPoint pos : CGPoint) {
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
@@ -237,68 +214,60 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         processUserMotion(forUpdate: currentTime)
-
-        moveInvaders(forUpdate: currentTime)
-
+        var toRemove = [SKNode]()
+        var didCreate = false
+        //loop through trees TODO make normal loop
+        enumerateChildNodes(withName: treeType.name) { node, stop in
+          switch self.invaderMovementDirection {
+          default:
+              //always moving down, TODO this shouldn't be a switch statement
+            if(node.position.y == self.nodeTop.y - 300 && !didCreate){
+                self.createTrees()
+                didCreate = true
+            }
+            else if(node.position.y <= self.nodeBottom.y){
+                //end of screen so remove node
+                node.removeFromParent()
+            }
+            node.position = CGPoint(x: node.position.x, y: node.position.y - 10)
+          }
+          //update move time
+          self.timeOfLastMove = currentTime
+        }
+        moveTrees(forUpdate: currentTime)
     }
     
-    func moveInvaders(forUpdate currentTime: CFTimeInterval) {
-      // 1
+    func moveTrees(forUpdate currentTime: CFTimeInterval) {
+      //is it time to move?
       if (currentTime - timeOfLastMove < timePerMove) {
         return
       }
       
-      // 2
+      //loop through trees
       enumerateChildNodes(withName: treeType.name) { node, stop in
         switch self.invaderMovementDirection {
-        case .right:
-          node.position = CGPoint(x: node.position.x + 10, y: node.position.y)
-        case .left:
-          node.position = CGPoint(x: node.position.x - 10, y: node.position.y)
-        case .downThenLeft, .downThenRight:
-          node.position = CGPoint(x: node.position.x, y: node.position.y - 10)
-        case .none:
-          break
+        default:
+            //always moving down, TODO this shouldn't be a switch statement
+            node.position = CGPoint(x: node.position.x, y: node.position.y - 10)
         }
         
-        // 3
+        //update move time
         self.timeOfLastMove = currentTime
       }
     }
     
     func processUserMotion(forUpdate currentTime: CFTimeInterval) {
-      // 1
-      if let ship = childNode(withName: kShipName) as? SKSpriteNode {
-        // 2
+      //get the hiker
+      if let hiker = childNode(withName: kHikerName) as? SKSpriteNode {
+        //get accelerometer data
         if let data = motionManager.accelerometerData {
-          // 3
+          //device is flat no matter the orientation
           if fabs(data.acceleration.x) > 0.2 {
-            // 4 How do you move the ship?
-            ship.physicsBody!.applyForce(CGVector(dx: 40 * CGFloat(data.acceleration.x), dy: 0))
+            //move hiker with force from physics body x accelerometer, change the num 40 if it doesn't look right
+            hiker.physicsBody!.applyForce(CGVector(dx: 40 * CGFloat(data.acceleration.x), dy: 0))
           }
         }
       }
