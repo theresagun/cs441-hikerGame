@@ -13,22 +13,29 @@ class GameScene: SKScene {
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
+    //keep track of score & health at top in labels
+    var scoreLabel: SKLabelNode!
+    var healthLabel: SKLabelNode!
+    var score = 0
+    var healthTracker = 10
     
     var content = false
     //motion manager for tilting the device
     let motionManager = CMMotionManager()
-
-    
-    //trees begin moving to the right TODO delete
-    var invaderMovementDirection: InvaderMovementDirection = .right
-    //trees didn't move yet so time == 0
-    var timeOfLastMove: CFTimeInterval = 0.0
-    //trees take one second per move
-    let timePerMove: CFTimeInterval = 0.5
-
+    //y value at which we generate more trees
+    var generationPoint = 500
+    //speed
+    var treeSpeed = 5
+    //tree info
     enum treeType {
         case live
         case dead
+        static var t1: Bool {
+            return true
+        }
+        static var t2: Bool {
+            return false
+        }
         static var size: CGSize {
             return CGSize(width: 50, height: 50)
         }
@@ -36,21 +43,9 @@ class GameScene: SKScene {
             return "Tree"
         }
     }
-
-    let kHikerSize = CGSize(width: 50, height: 50)
+    //hiker infor
     let kHikerName = "hiker"
-    
-    let kScoreName = "scoreLabel"
-    let kHealthName = "healthLabel"
-
-    enum InvaderMovementDirection {
-      case right
-      case left
-      case downThenRight
-      case downThenLeft
-      case none
-    }
-
+    //finding top and bottom of screen
     var viewTop: CGPoint!
     var nodeTop: CGPoint!
     var sceneTop: CGPoint!
@@ -63,39 +58,28 @@ class GameScene: SKScene {
             contentOnScreen()
             content = true
             motionManager.startAccelerometerUpdates()
-
         }
     }
     
     func contentOnScreen(){
-        //add a tree
-       // let tree = SKSpriteNode(imageNamed: "deadTree.png")
-//        let tree = SKSpriteNode(color: SKColor.purple, size: CGSize.init(width: 50, height: 50))
-//        tree.position = CGPoint(x: 0, y: 0) //TODO maybe change this?
-//        self.addChild(tree)
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-
         createTrees()
         placeHiker()
         setupLabels()
-
         //make background a forest (set to image later??)
         self.backgroundColor = SKColor.brown
     }
     
     func makeTree(ofType tType: treeType) -> SKNode {
-      // use the type to determine color -- TODO will probably use this to determine damage?
-//      var treeColor: SKColor //probably don't need?
-//
-//      switch(tType) {
-//      case .a:
-//        treeColor = SKColor.red
-//      case .b:
-//        treeColor = SKColor.purple
-//      }
-      
       // create a sprite (begins as a rectangle of specified color)
         let tree = SKSpriteNode(color: SKColor.green, size: GameScene.treeType.size)
+        tree.userData = NSMutableDictionary()
+        switch tType { //store if live or dead in the node
+        case .live:
+            tree.userData?.setValue(GameScene.treeType.t1, forKeyPath: "type")
+        case .dead:
+            tree.userData?.setValue(GameScene.treeType.t2, forKeyPath: "type")
+        }
         //let tree = SKSpriteNode(imageNamed: "x")
         tree.name = GameScene.treeType.name
       
@@ -112,10 +96,6 @@ class GameScene: SKScene {
         let sceneCorner = scene!.view!.convert(viewCorner, to:scene!)
         let nodeCorner = scene!.convert(sceneCorner,to:GameScene())
         
-        let viewCorner2 = CGPoint(x:scene!.view!.frame.maxX,y:scene!.view!.frame.minY)
-        let sceneCorner2 = scene!.view!.convert(viewCorner2, to:scene!)
-        let nodeCorner2 = scene!.convert(sceneCorner2,to:GameScene())
-        
         let baseOrigin = CGPoint(x: nodeCorner.x, y: self.nodeTop.y)
         
         var tType: treeType
@@ -130,9 +110,8 @@ class GameScene: SKScene {
             else{
                 tType = .dead
             }
-            //TODO the trees will only generate on one side of the screen?
             //place tree randomly along x axis at top of screen
-            let rand = Int.random(in: Int(nodeCorner.x) ... Int(nodeCorner2.x))
+            let rand = Int.random(in: Int(nodeCorner.x) ... (2*abs(Int(nodeCorner.x))))
             let treePosition = CGPoint(x: baseOrigin.x + CGFloat(rand), y: baseOrigin.y)
           let tree = makeTree(ofType: tType)
           tree.position = treePosition
@@ -154,7 +133,7 @@ class GameScene: SKScene {
     }
 
     func makeHiker() -> SKNode {
-      let hiker = SKSpriteNode(color: SKColor.black, size: kHikerSize)
+      let hiker = SKSpriteNode(color: SKColor.black, size: CGSize(width: 50, height: 50))
       hiker.name = kHikerName
         //make a physics body the size of the hiker
         hiker.physicsBody = SKPhysicsBody(rectangleOf: hiker.frame.size)
@@ -168,97 +147,79 @@ class GameScene: SKScene {
     }
     
     func setupLabels() {
-//        let viewTop = CGPoint(x:scene!.view!.center.x,y:scene!.view!.frame.minY)
-//        let sceneTop = scene!.view!.convert(viewTop, to:scene!)
-//        let nodeTop = scene!.convert(sceneTop,to:GameScene())
       //create score label TODO maybe score is time survived?
-      let scoreLabel = SKLabelNode(fontNamed: "Courier")
-      scoreLabel.name = kScoreName
-      scoreLabel.fontSize = 25
-      scoreLabel.fontColor = SKColor.white
-      scoreLabel.text = String(format: "Score: %04u", 0)
-        scoreLabel.position = CGPoint(x: self.nodeTop.x + 150, y: self.nodeTop.y-100)
+        self.scoreLabel = SKLabelNode(fontNamed: "Courier")
+        self.scoreLabel.name = "scoreLabel"
+        self.scoreLabel.fontSize = 25
+        self.scoreLabel.fontColor = SKColor.white
+        self.scoreLabel.text = String(format: "Score: %04u", 0)
+        self.scoreLabel.position = CGPoint(x: self.nodeTop.x + 150, y: self.nodeTop.y-100)
       addChild(scoreLabel)
-      
+
       //same for health TODO change health to hearts not %
-      let healthLabel = SKLabelNode(fontNamed: "Courier")
-      healthLabel.name = kHealthName
-      healthLabel.fontSize = 25
-      healthLabel.fontColor = SKColor.white
-      healthLabel.text = String(format: "Health: %.1f%%", 100.0)
-        healthLabel.position = CGPoint(x: self.nodeTop.x - 150, y: self.nodeTop.y-100)
+        self.healthLabel = SKLabelNode(fontNamed: "Courier")
+        self.healthLabel.name = "healthLabel"
+        self.healthLabel.fontSize = 25
+        self.healthLabel.fontColor = SKColor.white
+        self.healthLabel.text = String(format: "Health: %04u", 3)
+        self.healthLabel.position = CGPoint(x: self.nodeTop.x - 150, y: self.nodeTop.y-100)
       addChild(healthLabel)
     }
     
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
+    func updateLabels(){
+        self.scoreLabel.text = String(format: "Score: %04u", self.score)
+        self.healthLabel.text = String(format: "Health: %04u", self.healthTracker)
+
     }
     
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
+    func checkForCollisions(){
+        enumerateChildNodes(withName: treeType.name){ (node: SKNode, nil) in
+            if(node.intersects(self.childNode(withName: self.kHikerName)!)){
+                //if it intersects
+                node.removeFromParent()
+                if(((node.userData?.value(forKey: "type"))) != nil){
+                    //true so live
+                    self.healthTracker -= 1
+                    return
+                }
+                else{
+                    self.healthTracker -= 2
+                    return
+                }
+            }
+          }
         }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
-    }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         processUserMotion(forUpdate: currentTime)
-        var toRemove = [SKNode]()
+        
+        checkForCollisions()
+        
         var didCreate = false
+        var gotPoints = false
         //loop through trees TODO make normal loop
-        enumerateChildNodes(withName: treeType.name) { node, stop in
-          switch self.invaderMovementDirection {
-          default:
-              //always moving down, TODO this shouldn't be a switch statement
-            if(node.position.y == self.nodeTop.y - 300 && !didCreate){
+        enumerateChildNodes(withName: treeType.name) { (node: SKNode, nil) in
+            true; do {
+            if(node.position.y == self.nodeTop.y - CGFloat(self.generationPoint) && !didCreate){
                 self.createTrees()
                 didCreate = true
             }
             else if(node.position.y <= self.nodeBottom.y){
                 //end of screen so remove node
                 node.removeFromParent()
+                if(!gotPoints){
+                    self.score += 1
+                    gotPoints = true
+                }
             }
-            node.position = CGPoint(x: node.position.x, y: node.position.y - 10)
+            node.position = CGPoint(x: node.position.x, y: node.position.y - CGFloat(self.treeSpeed))
           }
-          //update move time
-          self.timeOfLastMove = currentTime
         }
-        moveTrees(forUpdate: currentTime)
-    }
-    
-    func moveTrees(forUpdate currentTime: CFTimeInterval) {
-      //is it time to move?
-      if (currentTime - timeOfLastMove < timePerMove) {
-        return
-      }
-      
-      //loop through trees
-      enumerateChildNodes(withName: treeType.name) { node, stop in
-        switch self.invaderMovementDirection {
-        default:
-            //always moving down, TODO this shouldn't be a switch statement
-            node.position = CGPoint(x: node.position.x, y: node.position.y - 10)
-        }
+        updateLabels()
         
-        //update move time
-        self.timeOfLastMove = currentTime
-      }
     }
-    
+
     func processUserMotion(forUpdate currentTime: CFTimeInterval) {
       //get the hiker
       if let hiker = childNode(withName: kHikerName) as? SKSpriteNode {
@@ -272,6 +233,5 @@ class GameScene: SKScene {
         }
       }
     }
-
 
 }
