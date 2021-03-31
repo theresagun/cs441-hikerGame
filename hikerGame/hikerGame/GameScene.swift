@@ -11,8 +11,6 @@ import CoreMotion
 
 class GameScene: SKScene {
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
     var viewController: UIViewController?
     //keep track of score & health at top in labels
     var scoreLabel: SKLabelNode!
@@ -105,12 +103,8 @@ class GameScene: SKScene {
         self.viewTop = CGPoint(x:scene!.view!.center.x,y:scene!.view!.frame.minY)
         self.sceneTop = scene!.view!.convert(viewTop, to:scene!)
         self.nodeTop = scene!.convert(sceneTop,to:GameScene())
-        
-        let viewCorner = CGPoint(x:scene!.view!.frame.minX,y:scene!.view!.frame.minY)
-        let sceneCorner = scene!.view!.convert(viewCorner, to:scene!)
-        let nodeCorner = scene!.convert(sceneCorner,to:GameScene())
-        
-        let baseOrigin = CGPoint(x: nodeCorner.x, y: self.nodeTop.y)
+
+        let baseOrigin = CGPoint(x: CGFloat(0), y: self.nodeTop.y)
         
         var tType: treeType
         
@@ -125,7 +119,7 @@ class GameScene: SKScene {
                 tType = .dead
             }
             //place tree randomly along x axis at top of screen
-            let rand = Int.random(in: Int(nodeCorner.x) ... (2*abs(Int(nodeCorner.x))))
+            let rand = Int.random(in: (0-Int(self.nodeTop.x)) ... (2*Int(self.nodeTop.x)))
             let treePosition = CGPoint(x: baseOrigin.x + CGFloat(rand), y: baseOrigin.y)
           let tree = makeTree(ofType: tType)
           tree.position = treePosition
@@ -234,23 +228,11 @@ class GameScene: SKScene {
         updateLabels()
         //if health <= 0 --> segue to leaderboard w/ score saved
         if(self.healthTracker <= 0){
-            NSLog("here")
-            //save the score between views
-            //how to perform segue from game scene??
-            if((self.viewController == nil)){
-                NSLog("No vc")
-            }
+            //save the score between views does this happen here or in segue prep?
+            //go to leaderboard
             self.viewController?.performSegue(withIdentifier: "gameToLeaderboard", sender: self)
-NSLog("did not segue")
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NotificationIdentifier"), object: nil)
         }
         
-    }
-    
-    func segue(){
-        //self.viewController!.performSegue(withIdentifier: "leaderboard", sender: viewController)
-        (self.view!.window!.rootViewController as! GameViewController).performSegue(withIdentifier: "leaderboard", sender: nil)
-        //self.viewController?.performSegue(withIdentifier: "", sender: <#T##Any?#>)
     }
 
     func processUserMotion(forUpdate currentTime: CFTimeInterval) {
