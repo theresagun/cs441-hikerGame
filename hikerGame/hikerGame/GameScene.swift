@@ -16,7 +16,7 @@ class GameScene: SKScene {
     var scoreLabel: SKLabelNode!
     var healthLabel: SKLabelNode!
     var score = 0
-    var healthTracker = 10
+    var healthTracker = 1
     
     var content = false
     //motion manager for tilting the device
@@ -142,8 +142,9 @@ class GameScene: SKScene {
 
     func makeHiker() -> SKNode {
      // let hiker = SKSpriteNode(color: SKColor.black, size: CGSize(width: 50, height: 50))
-        let hiker = SKSpriteNode(imageNamed: "hikerResize")
-      hiker.name = kHikerName
+        let hikerImName = (self.viewController as! GameViewController).hikerImageName!
+        let hiker = SKSpriteNode(imageNamed: hikerImName)
+        hiker.name = kHikerName
         //make a physics body the size of the hiker
         hiker.physicsBody = SKPhysicsBody(rectangleOf: hiker.frame.size)
         //dynamic makes collisions and other things possible
@@ -228,7 +229,9 @@ class GameScene: SKScene {
         updateLabels()
         //if health <= 0 --> segue to leaderboard w/ score saved
         if(self.healthTracker <= 0){
-            //save the score between views does this happen here or in segue prep?
+            self.view?.isPaused = true
+            //save the score between views
+            (self.viewController as! GameViewController).score = self.score
             //go to leaderboard
             self.viewController?.performSegue(withIdentifier: "gameToLeaderboard", sender: self)
         }

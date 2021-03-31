@@ -21,6 +21,7 @@
 		3471F4282614C58A0040A37C /* deadTREE.png in Resources */ = {isa = PBXBuildFile; fileRef = 3471F4272614C58A0040A37C /* deadTREE.png */; };
 		3471F42D2614C7C20040A37C /* liveResize.png in Resources */ = {isa = PBXBuildFile; fileRef = 3471F42C2614C7C20040A37C /* liveResize.png */; };
 		3471F4382614D27D0040A37C /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3471F4372614D27D0040A37C /* LeaderboardViewController.swift */; };
+		3471F43D2614FC510040A37C /* PreplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3471F43C2614FC510040A37C /* PreplayViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		3471F4272614C58A0040A37C /* deadTREE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = deadTREE.png; path = ../../../../../../Downloads/deadTREE.png; sourceTree = "<group>"; };
 		3471F42C2614C7C20040A37C /* liveResize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liveResize.png; sourceTree = "<group>"; };
 		3471F4372614D27D0040A37C /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		3471F43C2614FC510040A37C /* PreplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreplayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				340CA3D9260B7FA9003513DF /* GameViewController.swift */,
 				3471F4372614D27D0040A37C /* LeaderboardViewController.swift */,
 				340CA3DB260B7FA9003513DF /* Main.storyboard */,
+				3471F43C2614FC510040A37C /* PreplayViewController.swift */,
 				3471F4152614C2BF0040A37C /* hikerResize.png */,
 				3471F42C2614C7C20040A37C /* liveResize.png */,
 				3471F4272614C58A0040A37C /* deadTREE.png */,
@@ -283,6 +286,7 @@
 			files = (
 				340CA3D8260B7FA9003513DF /* GameScene.swift in Sources */,
 				340CA3DA260B7FA9003513DF /* GameViewController.swift in Sources */,
+				3471F43D2614FC510040A37C /* PreplayViewController.swift in Sources */,
 				3471F4382614D27D0040A37C /* LeaderboardViewController.swift in Sources */,
 				340CA3D2260B7FA9003513DF /* AppDelegate.swift in Sources */,
 			);

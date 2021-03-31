@@ -9,10 +9,28 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+//protocol nameDelegate: class {
+//    func getName(n: String)
+//}
+
+protocol imageDelegate: class {
+    func getImageName()
+}
+
 class GameViewController: UIViewController {
+    
+//    weak var nDelegate: nameDelegate? // player name
+    //weak var iDelegate: imageDelegate? // image name
+    
+    var hikerImageName: String?
+    var playerName: String!
+    var score: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       // hikerImageName = iDelegate?.getImageName(i: <#T##String#>)
+        
         
         if let view = self.view as! SKView? {
             
@@ -28,6 +46,15 @@ class GameViewController: UIViewController {
         }
 
     }
+    
+//    func getImageName(i: String) {
+//        self.hikerImageName = i
+//        print(self.hikerImageName)
+//    }
+//
+//    func passName(){
+//        return nDelegate?.getName(n: <#T##String#>)
+//    }
 
     override var shouldAutorotate: Bool {
         return true
@@ -46,11 +73,16 @@ class GameViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "leaderboard"){
-            // LeaderboardViewController * dest = segue.destination
-            //TODO here we can share data between VCs?
+        print("in gvc and player name is ", self.score)
+        if(segue.identifier == "gameToLeaderboard"){
+            let lead: LeaderboardViewController = segue.destination as! LeaderboardViewController
+            //lead.hikerImageName = hikerChoice
+            lead.playerName = self.playerName
+          //  lead.playerName = self.playerName
+            lead.totalScore = self.score
+        //    gvc.iDelegate = self
+            
         }
-    }
     
 //    prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
 //        if([segue.identifier isEqualToString:@"mainToXerox"]){
@@ -60,4 +92,5 @@ class GameViewController: UIViewController {
 //            connectorClass.isXerox = isXerox;
 //            destinationVc.connectorClass = connectorClass;
 //        }
+}
 }
