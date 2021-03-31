@@ -16,9 +16,11 @@
 		340CA3DF260B7FAA003513DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 340CA3DE260B7FAA003513DF /* Assets.xcassets */; };
 		340CA3EA260B7FAA003513DF /* hikerGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340CA3E9260B7FAA003513DF /* hikerGameTests.swift */; };
 		340CA3F5260B7FAA003513DF /* hikerGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340CA3F4260B7FAA003513DF /* hikerGameUITests.swift */; };
-		340CA406260B894D003513DF /* pineTree.png in Resources */ = {isa = PBXBuildFile; fileRef = 340CA405260B894D003513DF /* pineTree.png */; };
-		340CA40C260B89E3003513DF /* deadTree.png in Resources */ = {isa = PBXBuildFile; fileRef = 340CA40A260B89E2003513DF /* deadTree.png */; };
 		340CA40D260B89E3003513DF /* hiker1.png in Resources */ = {isa = PBXBuildFile; fileRef = 340CA40B260B89E3003513DF /* hiker1.png */; };
+		3471F4162614C2BF0040A37C /* hikerResize.png in Resources */ = {isa = PBXBuildFile; fileRef = 3471F4152614C2BF0040A37C /* hikerResize.png */; };
+		3471F4282614C58A0040A37C /* deadTREE.png in Resources */ = {isa = PBXBuildFile; fileRef = 3471F4272614C58A0040A37C /* deadTREE.png */; };
+		3471F42D2614C7C20040A37C /* liveResize.png in Resources */ = {isa = PBXBuildFile; fileRef = 3471F42C2614C7C20040A37C /* liveResize.png */; };
+		3471F4382614D27D0040A37C /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3471F4372614D27D0040A37C /* LeaderboardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,9 +56,11 @@
 		340CA3F0260B7FAA003513DF /* hikerGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hikerGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		340CA3F4260B7FAA003513DF /* hikerGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hikerGameUITests.swift; sourceTree = "<group>"; };
 		340CA3F6260B7FAA003513DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		340CA405260B894D003513DF /* pineTree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pineTree.png; sourceTree = "<group>"; };
-		340CA40A260B89E2003513DF /* deadTree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deadTree.png; sourceTree = "<group>"; };
 		340CA40B260B89E3003513DF /* hiker1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hiker1.png; sourceTree = "<group>"; };
+		3471F4152614C2BF0040A37C /* hikerResize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hikerResize.png; sourceTree = "<group>"; };
+		3471F4272614C58A0040A37C /* deadTREE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = deadTREE.png; path = ../../../../../../Downloads/deadTREE.png; sourceTree = "<group>"; };
+		3471F42C2614C7C20040A37C /* liveResize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liveResize.png; sourceTree = "<group>"; };
+		3471F4372614D27D0040A37C /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,11 +115,13 @@
 				340CA3D3260B7FA9003513DF /* GameScene.sks */,
 				340CA3D5260B7FA9003513DF /* Actions.sks */,
 				340CA3D7260B7FA9003513DF /* GameScene.swift */,
-				340CA405260B894D003513DF /* pineTree.png */,
-				340CA40A260B89E2003513DF /* deadTree.png */,
-				340CA40B260B89E3003513DF /* hiker1.png */,
 				340CA3D9260B7FA9003513DF /* GameViewController.swift */,
+				3471F4372614D27D0040A37C /* LeaderboardViewController.swift */,
 				340CA3DB260B7FA9003513DF /* Main.storyboard */,
+				3471F4152614C2BF0040A37C /* hikerResize.png */,
+				3471F42C2614C7C20040A37C /* liveResize.png */,
+				3471F4272614C58A0040A37C /* deadTREE.png */,
+				340CA40B260B89E3003513DF /* hiker1.png */,
 				340CA3DE260B7FAA003513DF /* Assets.xcassets */,
 				340CA3E0260B7FAA003513DF /* Info.plist */,
 			);
@@ -244,9 +250,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				340CA3DD260B7FA9003513DF /* Main.storyboard in Resources */,
-				340CA40C260B89E3003513DF /* deadTree.png in Resources */,
+				3471F4282614C58A0040A37C /* deadTREE.png in Resources */,
+				3471F42D2614C7C20040A37C /* liveResize.png in Resources */,
+				3471F4162614C2BF0040A37C /* hikerResize.png in Resources */,
 				340CA3D4260B7FA9003513DF /* GameScene.sks in Resources */,
-				340CA406260B894D003513DF /* pineTree.png in Resources */,
 				340CA40D260B89E3003513DF /* hiker1.png in Resources */,
 				340CA3DF260B7FAA003513DF /* Assets.xcassets in Resources */,
 				340CA3D6260B7FA9003513DF /* Actions.sks in Resources */,
@@ -276,6 +283,7 @@
 			files = (
 				340CA3D8260B7FA9003513DF /* GameScene.swift in Sources */,
 				340CA3DA260B7FA9003513DF /* GameViewController.swift in Sources */,
+				3471F4382614D27D0040A37C /* LeaderboardViewController.swift in Sources */,
 				340CA3D2260B7FA9003513DF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,6 +13,7 @@ class GameScene: SKScene {
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
+    var viewController: UIViewController?
     //keep track of score & health at top in labels
     var scoreLabel: SKLabelNode!
     var healthLabel: SKLabelNode!
@@ -54,6 +55,9 @@ class GameScene: SKScene {
     var sceneBottom: CGPoint!
 
     override func didMove(to view: SKView) {
+        
+
+        
         if(!content){
             contentOnScreen()
             content = true
@@ -72,7 +76,18 @@ class GameScene: SKScene {
     
     func makeTree(ofType tType: treeType) -> SKNode {
       // create a sprite (begins as a rectangle of specified color)
-        let tree = SKSpriteNode(color: SKColor.green, size: GameScene.treeType.size)
+//        var color = SKColor.green
+        var treeImage = "liveResize"
+        switch tType {
+        case .dead:
+//            color = SKColor.lightGray
+            treeImage = "deadTREE-1"
+        case .live:
+//            color = SKColor.green
+            treeImage = "liveResize"
+        }
+        let tree = SKSpriteNode(imageNamed: treeImage)
+       // let tree = SKSpriteNode(color: color, size: GameScene.treeType.size)
         tree.userData = NSMutableDictionary()
         switch tType { //store if live or dead in the node
         case .live:
@@ -80,7 +95,6 @@ class GameScene: SKScene {
         case .dead:
             tree.userData?.setValue(GameScene.treeType.t2, forKeyPath: "type")
         }
-        //let tree = SKSpriteNode(imageNamed: "x")
         tree.name = GameScene.treeType.name
       
       return tree
@@ -133,7 +147,8 @@ class GameScene: SKScene {
     }
 
     func makeHiker() -> SKNode {
-      let hiker = SKSpriteNode(color: SKColor.black, size: CGSize(width: 50, height: 50))
+     // let hiker = SKSpriteNode(color: SKColor.black, size: CGSize(width: 50, height: 50))
+        let hiker = SKSpriteNode(imageNamed: "hikerResize")
       hiker.name = kHikerName
         //make a physics body the size of the hiker
         hiker.physicsBody = SKPhysicsBody(rectangleOf: hiker.frame.size)
@@ -161,7 +176,7 @@ class GameScene: SKScene {
         self.healthLabel.name = "healthLabel"
         self.healthLabel.fontSize = 25
         self.healthLabel.fontColor = SKColor.white
-        self.healthLabel.text = String(format: "Health: %04u", 3)
+        self.healthLabel.text = String(format: "Health: %f", 3)
         self.healthLabel.position = CGPoint(x: self.nodeTop.x - 150, y: self.nodeTop.y-100)
       addChild(healthLabel)
     }
@@ -217,7 +232,25 @@ class GameScene: SKScene {
           }
         }
         updateLabels()
+        //if health <= 0 --> segue to leaderboard w/ score saved
+        if(self.healthTracker <= 0){
+            NSLog("here")
+            //save the score between views
+            //how to perform segue from game scene??
+            if((self.viewController == nil)){
+                NSLog("No vc")
+            }
+            self.viewController?.performSegue(withIdentifier: "gameToLeaderboard", sender: self)
+NSLog("did not segue")
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NotificationIdentifier"), object: nil)
+        }
         
+    }
+    
+    func segue(){
+        //self.viewController!.performSegue(withIdentifier: "leaderboard", sender: viewController)
+        (self.view!.window!.rootViewController as! GameViewController).performSegue(withIdentifier: "leaderboard", sender: nil)
+        //self.viewController?.performSegue(withIdentifier: "", sender: <#T##Any?#>)
     }
 
     func processUserMotion(forUpdate currentTime: CFTimeInterval) {
