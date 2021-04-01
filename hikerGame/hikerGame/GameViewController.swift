@@ -9,18 +9,7 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-//protocol nameDelegate: class {
-//    func getName(n: String)
-//}
-
-protocol imageDelegate: class {
-    func getImageName()
-}
-
 class GameViewController: UIViewController {
-    
-//    weak var nDelegate: nameDelegate? // player name
-    //weak var iDelegate: imageDelegate? // image name
     
     var hikerImageName: String?
     var playerName: String!
@@ -28,9 +17,6 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       // hikerImageName = iDelegate?.getImageName(i: <#T##String#>)
-        
         
         if let view = self.view as! SKView? {
             
