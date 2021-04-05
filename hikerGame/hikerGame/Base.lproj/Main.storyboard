@@ -60,7 +60,7 @@
                                 <rect key="frame" x="145" y="480" width="125" height="30"/>
                                 <state key="normal" title="View Leaderboard"/>
                                 <connections>
-                                    <segue destination="smh-KY-KUK" kind="show" id="lKU-W4-Sxr"/>
+                                    <segue destination="smh-KY-KUK" kind="show" identifier="mainToLeaderboard" id="lKU-W4-Sxr"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" misplaced="YES" text="Dangerous Hiking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1U-JG-hmI">
@@ -97,65 +97,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your character" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhc-TE-hVX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose your character" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhc-TE-hVX">
                                 <rect key="frame" x="120" y="145" width="174" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="YbQ-cE-bGa"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qEC-pR-COK">
-                                <rect key="frame" x="77" y="222" width="158.5" height="213.5"/>
-                                <state key="normal" title="hiker1" image="hiker1.png"/>
+                                <rect key="frame" x="88" y="234" width="120" height="192"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="6c7-jp-CLL"/>
+                                    <constraint firstAttribute="height" constant="192" id="oLM-ZY-HE3"/>
+                                </constraints>
+                                <state key="normal" title="hiker1" image="Hiker1"/>
                                 <connections>
                                     <action selector="clickedButton1WithButton:" destination="jMd-rb-R24" eventType="touchUpInside" id="q97-EC-6JE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LqR-kb-GM7">
-                                <rect key="frame" x="176" y="378" width="165" height="280"/>
-                                <state key="normal" title="hiker4" image="hiker4.png"/>
+                                <rect key="frame" x="216" y="461" width="137" height="193"/>
+                                <state key="normal" title="hiker4" image="Hiker4size"/>
                                 <connections>
                                     <action selector="clickedButton4WithButton:" destination="jMd-rb-R24" eventType="touchUpInside" id="ze0-93-PHg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yJ-wp-Vcb">
-                                <rect key="frame" x="77" y="378" width="158.5" height="280"/>
-                                <state key="normal" title="hiker3" image="hiker3"/>
+                                <rect key="frame" x="88" y="461" width="120" height="192.5"/>
+                                <state key="normal" title="hiker3" image="Hiker3size.png"/>
                                 <connections>
                                     <action selector="clickedButton3WithButton:" destination="jMd-rb-R24" eventType="touchUpInside" id="0y6-Xn-4R8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5A-li-stU">
-                                <rect key="frame" x="167.5" y="222" width="173.5" height="213.5"/>
-                                <state key="normal" title="hiker2" image="hiker2"/>
+                                <rect key="frame" x="216" y="234" width="137" height="192"/>
+                                <state key="normal" title="hiker2" image="Hiker2-1"/>
                                 <connections>
                                     <action selector="clickedButton2WithButton:" destination="jMd-rb-R24" eventType="touchUpInside" id="uLI-gg-Lse"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOI-0w-SKJ">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOI-0w-SKJ">
                                 <rect key="frame" x="191" y="103" width="32" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="FP0-CL-sDM"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your name?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3E-3D-Cu0">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What is your name?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3E-3D-Cu0">
                                 <rect key="frame" x="132" y="74" width="150" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="2H4-Sp-JS4"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHA-rv-stl">
-                                <rect key="frame" x="191" y="552" width="36" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="XO2-Vx-k3c"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHA-rv-stl">
+                                <rect key="frame" x="189" y="732" width="36" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="PLAY"/>
                                 <connections>
                                     <segue destination="BV1-FR-VrT" kind="presentation" identifier="preplayToGame" id="MJP-8e-woe"/>
@@ -165,34 +161,20 @@
                         <viewLayoutGuide key="safeArea" id="0cv-df-PCW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="qEC-pR-COK" firstAttribute="top" secondItem="qhc-TE-hVX" secondAttribute="bottom" constant="56" id="5c4-0D-Pom"/>
-                            <constraint firstItem="0yJ-wp-Vcb" firstAttribute="top" secondItem="qEC-pR-COK" secondAttribute="bottom" constant="-57.5" id="8hd-Ic-NpC"/>
-                            <constraint firstItem="bOI-0w-SKJ" firstAttribute="top" secondItem="f3E-3D-Cu0" secondAttribute="bottom" constant="8" symbolic="YES" id="AS4-Hq-iD5"/>
-                            <constraint firstItem="qEC-pR-COK" firstAttribute="width" secondItem="LqR-kb-GM7" secondAttribute="width" multiplier="0.959184" id="BHW-PJ-cvs"/>
-                            <constraint firstItem="bOI-0w-SKJ" firstAttribute="centerX" secondItem="f3E-3D-Cu0" secondAttribute="centerX" id="CAZ-yx-QNp"/>
-                            <constraint firstItem="f3E-3D-Cu0" firstAttribute="centerX" secondItem="jow-Sa-CRQ" secondAttribute="centerX" id="D9N-CL-EM7"/>
-                            <constraint firstItem="LqR-kb-GM7" firstAttribute="top" secondItem="I5A-li-stU" secondAttribute="bottom" constant="-57.5" id="EB3-S7-2IQ"/>
-                            <constraint firstItem="qhc-TE-hVX" firstAttribute="top" secondItem="bOI-0w-SKJ" secondAttribute="bottom" constant="8" symbolic="YES" id="HdJ-sm-ws6"/>
-                            <constraint firstItem="fHA-rv-stl" firstAttribute="centerX" secondItem="0cv-df-PCW" secondAttribute="centerX" id="IUz-d2-2gn"/>
-                            <constraint firstItem="qEC-pR-COK" firstAttribute="width" secondItem="0yJ-wp-Vcb" secondAttribute="width" id="O5Y-am-yqO"/>
-                            <constraint firstItem="f3E-3D-Cu0" firstAttribute="centerX" secondItem="0cv-df-PCW" secondAttribute="centerX" id="RFa-pv-IUY"/>
-                            <constraint firstItem="qEC-pR-COK" firstAttribute="height" secondItem="LqR-kb-GM7" secondAttribute="height" multiplier="0.762238" id="Rgt-Ka-QOD"/>
-                            <constraint firstItem="qEC-pR-COK" firstAttribute="leading" secondItem="0cv-df-PCW" secondAttribute="leading" constant="77" id="SdR-qR-KeZ"/>
-                            <constraint firstItem="f3E-3D-Cu0" firstAttribute="top" secondItem="0cv-df-PCW" secondAttribute="top" constant="74" id="UOK-Fo-SXI"/>
-                            <constraint firstItem="bOI-0w-SKJ" firstAttribute="centerX" secondItem="qhc-TE-hVX" secondAttribute="centerX" id="ZWg-2A-By5"/>
-                            <constraint firstItem="f3E-3D-Cu0" firstAttribute="centerX" secondItem="bOI-0w-SKJ" secondAttribute="centerX" id="c0n-hi-Luw"/>
-                            <constraint firstItem="0cv-df-PCW" firstAttribute="trailing" secondItem="LqR-kb-GM7" secondAttribute="trailing" constant="73" id="htl-mi-a35"/>
-                            <constraint firstItem="qhc-TE-hVX" firstAttribute="top" secondItem="bOI-0w-SKJ" secondAttribute="bottom" constant="8" symbolic="YES" id="hwI-uL-1Hz"/>
-                            <constraint firstItem="0cv-df-PCW" firstAttribute="trailing" secondItem="I5A-li-stU" secondAttribute="trailing" constant="73" id="iwc-gw-fvb"/>
-                            <constraint firstItem="f3E-3D-Cu0" firstAttribute="top" secondItem="0cv-df-PCW" secondAttribute="top" constant="74" id="kuS-94-LmJ"/>
-                            <constraint firstItem="I5A-li-stU" firstAttribute="top" secondItem="qhc-TE-hVX" secondAttribute="bottom" constant="56" id="l5h-ba-o4d"/>
-                            <constraint firstItem="0cv-df-PCW" firstAttribute="bottom" secondItem="fHA-rv-stl" secondAttribute="bottom" constant="211" id="t8k-g0-pf0"/>
-                            <constraint firstItem="bOI-0w-SKJ" firstAttribute="top" secondItem="f3E-3D-Cu0" secondAttribute="bottom" constant="8" symbolic="YES" id="uS3-8Z-s5c"/>
-                            <constraint firstItem="qEC-pR-COK" firstAttribute="width" secondItem="I5A-li-stU" secondAttribute="width" multiplier="0.912621" id="vnv-Sx-aGr"/>
-                            <constraint firstItem="0yJ-wp-Vcb" firstAttribute="leading" secondItem="0cv-df-PCW" secondAttribute="leading" constant="77" id="vz4-as-zxq"/>
-                            <constraint firstItem="qEC-pR-COK" firstAttribute="height" secondItem="0yJ-wp-Vcb" secondAttribute="height" multiplier="0.762238" id="wlv-Oy-313"/>
-                            <constraint firstItem="qhc-TE-hVX" firstAttribute="centerX" secondItem="bOI-0w-SKJ" secondAttribute="centerX" id="yTd-6S-r0w"/>
-                            <constraint firstItem="qEC-pR-COK" firstAttribute="height" secondItem="I5A-li-stU" secondAttribute="height" id="zNG-Qc-rkY"/>
+                            <constraint firstItem="qEC-pR-COK" firstAttribute="width" secondItem="I5A-li-stU" secondAttribute="width" multiplier="0.875912" id="0CU-jt-bqR"/>
+                            <constraint firstItem="0yJ-wp-Vcb" firstAttribute="top" secondItem="qEC-pR-COK" secondAttribute="bottom" constant="35" id="Acg-by-MXx"/>
+                            <constraint firstItem="qEC-pR-COK" firstAttribute="width" secondItem="0yJ-wp-Vcb" secondAttribute="width" id="BYA-5F-lzN"/>
+                            <constraint firstItem="qEC-pR-COK" firstAttribute="top" secondItem="0cv-df-PCW" secondAttribute="top" constant="234" id="HDy-a5-WNI"/>
+                            <constraint firstItem="qEC-pR-COK" firstAttribute="leading" secondItem="0cv-df-PCW" secondAttribute="leading" constant="88" id="NQx-Hb-LT4"/>
+                            <constraint firstItem="qEC-pR-COK" firstAttribute="height" secondItem="LqR-kb-GM7" secondAttribute="height" multiplier="0.994819" id="QkC-Nt-gzC"/>
+                            <constraint firstItem="I5A-li-stU" firstAttribute="leading" secondItem="qEC-pR-COK" secondAttribute="trailing" constant="8" symbolic="YES" id="X3x-dx-nyo"/>
+                            <constraint firstItem="qEC-pR-COK" firstAttribute="height" secondItem="0yJ-wp-Vcb" secondAttribute="height" multiplier="0.997403" id="Ysc-rI-ZoD"/>
+                            <constraint firstItem="qEC-pR-COK" firstAttribute="height" secondItem="I5A-li-stU" secondAttribute="height" id="gdL-da-KZD"/>
+                            <constraint firstItem="LqR-kb-GM7" firstAttribute="top" secondItem="qEC-pR-COK" secondAttribute="bottom" constant="35" id="i3c-Tf-Ron"/>
+                            <constraint firstItem="qEC-pR-COK" firstAttribute="top" secondItem="I5A-li-stU" secondAttribute="top" id="kKD-El-6kt"/>
+                            <constraint firstItem="qEC-pR-COK" firstAttribute="width" secondItem="LqR-kb-GM7" secondAttribute="width" multiplier="0.875912" id="uoa-lG-skH"/>
+                            <constraint firstItem="0yJ-wp-Vcb" firstAttribute="leading" secondItem="qEC-pR-COK" secondAttribute="leading" id="wgk-6r-mRu"/>
+                            <constraint firstItem="LqR-kb-GM7" firstAttribute="leading" secondItem="qEC-pR-COK" secondAttribute="trailing" constant="8" symbolic="YES" id="yNe-7g-pgK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Hiker Setup" id="NU7-61-jzK"/>
@@ -219,6 +201,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m41-IO-MMs">
                                 <rect key="frame" x="241" y="719" width="126" height="30"/>
                                 <state key="normal" title="Reset leaderboard"/>
+                                <connections>
+                                    <action selector="clickResetWithButton:" destination="smh-KY-KUK" eventType="touchUpInside" id="5SW-8H-2fv"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QIn-fH-p2o">
                                 <rect key="frame" x="30" y="124" width="354" height="560"/>
@@ -247,6 +232,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Leaderboard" id="Hij-K0-TIP"/>
                     <connections>
+                        <outlet property="resetButton" destination="m41-IO-MMs" id="HSe-Ft-eQP"/>
                         <outlet property="tableView" destination="QIn-fH-p2o" id="sos-Jt-Dul"/>
                     </connections>
                 </viewController>
@@ -357,10 +343,10 @@
         <segue reference="xyp-23-qgd"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="hiker1.png" width="111.68733215332031" height="186.30728149414062"/>
-        <image name="hiker2" width="107" height="195"/>
-        <image name="hiker3" width="107" height="280"/>
-        <image name="hiker4.png" width="113" height="155"/>
+        <image name="Hiker1" width="107" height="195"/>
+        <image name="Hiker2-1" width="107" height="195"/>
+        <image name="Hiker3size.png" width="107" height="195"/>
+        <image name="Hiker4size" width="107" height="195"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -14,6 +14,7 @@ import UIKit
 class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var resetButton: UIButton!
     var names: [String] = []
     var scores: [String] = []
 
@@ -88,6 +89,12 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
             mainVC.scores = self.scores
 
         }
+    }
+    
+    @IBAction func clickReset(button: UIButton){
+        self.names = []
+        self.scores = []
+        tableView.reloadData()
     }
     
     //only for editing?

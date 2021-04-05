@@ -246,7 +246,7 @@ class GameScene: SKScene {
           //device is flat no matter the orientation
           if fabs(data.acceleration.x) > 0.2 {
             //move hiker with force from physics body x accelerometer, change the num 40 if it doesn't look right
-            hiker.physicsBody!.applyForce(CGVector(dx: 40 * CGFloat(data.acceleration.x), dy: 0))
+            hiker.physicsBody!.applyForce(CGVector(dx: 30 * CGFloat(data.acceleration.x), dy: 0))
           }
         }
       }

@@ -27,6 +27,10 @@
 		3471F4382614D27D0040A37C /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3471F4372614D27D0040A37C /* LeaderboardViewController.swift */; };
 		3471F43D2614FC510040A37C /* PreplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3471F43C2614FC510040A37C /* PreplayViewController.swift */; };
 		3471F44226155D3F0040A37C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3471F44126155D3F0040A37C /* ViewController.swift */; };
+		347D3BE7261B5520006A0CF9 /* Hiker2.png in Resources */ = {isa = PBXBuildFile; fileRef = 347D3BE3261B5520006A0CF9 /* Hiker2.png */; };
+		347D3BE8261B5520006A0CF9 /* Hiker3size.png in Resources */ = {isa = PBXBuildFile; fileRef = 347D3BE4261B5520006A0CF9 /* Hiker3size.png */; };
+		347D3BE9261B5520006A0CF9 /* Hiker1.png in Resources */ = {isa = PBXBuildFile; fileRef = 347D3BE5261B5520006A0CF9 /* Hiker1.png */; };
+		347D3BEA261B5520006A0CF9 /* Hiker4size.png in Resources */ = {isa = PBXBuildFile; fileRef = 347D3BE6261B5520006A0CF9 /* Hiker4size.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +77,10 @@
 		3471F4372614D27D0040A37C /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		3471F43C2614FC510040A37C /* PreplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreplayViewController.swift; sourceTree = "<group>"; };
 		3471F44126155D3F0040A37C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		347D3BE3261B5520006A0CF9 /* Hiker2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Hiker2.png; path = ../../../../../../Downloads/Hiker2.png; sourceTree = "<group>"; };
+		347D3BE4261B5520006A0CF9 /* Hiker3size.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hiker3size.png; sourceTree = "<group>"; };
+		347D3BE5261B5520006A0CF9 /* Hiker1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Hiker1.png; path = ../../../../../../Downloads/Hiker1.png; sourceTree = "<group>"; };
+		347D3BE6261B5520006A0CF9 /* Hiker4size.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hiker4size.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +145,10 @@
 				345FABF4261AA42900AB9D57 /* hiker2.png */,
 				345FABF5261AA42900AB9D57 /* hiker3.png */,
 				345FABF6261AA42900AB9D57 /* hiker4.png */,
+				347D3BE5261B5520006A0CF9 /* Hiker1.png */,
+				347D3BE3261B5520006A0CF9 /* Hiker2.png */,
+				347D3BE4261B5520006A0CF9 /* Hiker3size.png */,
+				347D3BE6261B5520006A0CF9 /* Hiker4size.png */,
 				3471F42C2614C7C20040A37C /* liveResize.png */,
 				3471F4272614C58A0040A37C /* deadTREE.png */,
 				340CA40B260B89E3003513DF /* hiker1.png */,
@@ -268,8 +280,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				340CA3DD260B7FA9003513DF /* Main.storyboard in Resources */,
+				347D3BE9261B5520006A0CF9 /* Hiker1.png in Resources */,
+				347D3BE8261B5520006A0CF9 /* Hiker3size.png in Resources */,
 				345FABF8261AA42900AB9D57 /* hiker3.png in Resources */,
+				347D3BE7261B5520006A0CF9 /* Hiker2.png in Resources */,
 				345FABF9261AA42900AB9D57 /* hiker4.png in Resources */,
+				347D3BEA261B5520006A0CF9 /* Hiker4size.png in Resources */,
 				345FABF7261AA42900AB9D57 /* hiker2.png in Resources */,
 				3471F4282614C58A0040A37C /* deadTREE.png in Resources */,
 				3471F42D2614C7C20040A37C /* liveResize.png in Resources */,

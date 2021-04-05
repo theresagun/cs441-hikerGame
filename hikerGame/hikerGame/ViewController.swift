@@ -33,7 +33,7 @@ class ViewController: UIViewController {
             prep.names = self.names
             prep.scores = self.scores
         }
-        else if(segue.identifier == "mainToLeader"){
+        else if(segue.identifier == "mainToLeaderboard"){
 //            segue.destination = self.leader
             let lead: LeaderboardViewController = segue.destination as! LeaderboardViewController
             lead.names = self.names ?? []
