@@ -14,9 +14,15 @@ class PreplayViewController: UIViewController {
     @IBOutlet var nameField: UITextField!
     @IBOutlet var hiker1: UIButton!
     @IBOutlet var hiker2: UIButton!
+    @IBOutlet var hiker3: UIButton!
+    @IBOutlet var hiker4: UIButton!
     
     var hikerChoice: String!
     var name: String!
+    
+//    var leader: LeaderboardViewController?
+    var names: [String]?
+    var scores: [String]?
     
     //weak var iDelegate: imageDelegate?
 
@@ -30,10 +36,27 @@ class PreplayViewController: UIViewController {
     }
     
     @IBAction func clickedButton1(button: UIButton){
-        print("clicked hiker button")
+        print("clicked hiker1 button")
         //chose hiker image 1
         hikerChoice = "hikerResize"
-//        iDelegate?.getImageName()
+    }
+    
+    @IBAction func clickedButton2(button: UIButton){
+        print("clicked hiker2 button")
+        //chose hiker image 1
+        hikerChoice = "hiker2"
+    }
+    
+    @IBAction func clickedButton3(button: UIButton){
+        print("clicked hiker3 button")
+        //chose hiker image 1
+        hikerChoice = "hiker3"
+    }
+    
+    @IBAction func clickedButton4(button: UIButton){
+        print("clicked hiker4 button")
+        //chose hiker image 1
+        hikerChoice = "hiker4"
     }
     
 //    //delegate method
@@ -54,7 +77,10 @@ class PreplayViewController: UIViewController {
             let gvc: GameViewController = segue.destination as! GameViewController
             gvc.hikerImageName = hikerChoice
             gvc.playerName = nameField.text
-        //    gvc.iDelegate = self
+//            gvc.leader = self.leader
+            gvc.names = self.names ?? []
+            gvc.scores = self.scores ?? []
+            //    gvc.iDelegate = self
             
         }
 //        if let nav = segue.destination as? UINavigationController, let gvc = nav.topViewController as? GameViewController {

@@ -12,8 +12,7 @@ import UIKit
 //}
 
 class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    //@IBOutlet var label: UILabel!
+        
     @IBOutlet var tableView: UITableView!
     var names: [String] = []
     var scores: [String] = []
@@ -63,6 +62,9 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         let i = findIndex(num: s)
         names.insert(n, at: i)
         scores.insert(String(s), at: i)
+        
+        print(names)
+        print(scores)
             
         //    reloadScreen()
         tableView.reloadData()
@@ -80,7 +82,10 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "leaderToMain"){
-            let mainVC: UIViewController = segue.destination 
+            //TODO working on storing names and scores in app while it's on
+            let mainVC: ViewController = segue.destination as! ViewController
+            mainVC.names = self.names
+            mainVC.scores = self.scores
 
         }
     }

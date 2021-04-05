@@ -14,7 +14,11 @@ class GameViewController: UIViewController {
     var hikerImageName: String?
     var playerName: String!
     var score: Int?
-
+    
+//    var leader: LeaderboardViewController?
+    var names: [String]?
+    var scores: [String]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,13 +62,26 @@ class GameViewController: UIViewController {
         return true
     }
     
+//    @IBAction func unwind(sender: UIStoryboardSegue) {
+////        if let sourceViewController = sender.source as? MealViewController, let meal = sourceViewController.meal {
+////
+////            // Add a new meal.
+////            let newIndexPath = IndexPath(row: meals.count, section: 0)
+////
+////            meals.append(meal)
+////            tableView.insertRows(at: [newIndexPath], with: .automatic)
+//        //}
+//    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("in gvc and player name is ", self.score)
-        if(segue.identifier == "gameToLeaderboard"){
-            let lead: LeaderboardViewController = segue.destination as! LeaderboardViewController
-            //lead.hikerImageName = hikerChoice
+        let lead: LeaderboardViewController = segue.destination as! LeaderboardViewController
+        lead.names = self.names ?? []
+        lead.scores = self.scores ?? [] 
+//        segue.destination = self.leader!
+//        if(segue.identifier == "gameToLeaderboard"){
+//            //lead.hikerImageName = hikerChoice
+//            lead.playerName = self.playerName
             lead.playerName = self.playerName
-          //  lead.playerName = self.playerName
             lead.totalScore = self.score
         //    gvc.iDelegate = self
             
@@ -79,4 +96,4 @@ class GameViewController: UIViewController {
 //            destinationVc.connectorClass = connectorClass;
 //        }
 }
-}
+
