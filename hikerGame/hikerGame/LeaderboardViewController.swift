@@ -7,10 +7,6 @@
 
 import UIKit
 
-//protocol NameDelegate {
-//    func getName(n: String)
-//}
-
 class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     @IBOutlet var tableView: UITableView!
@@ -20,6 +16,8 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
 
     var playerName: String?
     var totalScore: Int?
+    
+    var reset = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,11 +61,6 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         let i = findIndex(num: s)
         names.insert(n, at: i)
         scores.insert(String(s), at: i)
-        
-        print(names)
-        print(scores)
-            
-        //    reloadScreen()
         tableView.reloadData()
         }
     
@@ -81,31 +74,12 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         return index;
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "leaderToMain"){
-            //TODO working on storing names and scores in app while it's on
-            let mainVC: ViewController = segue.destination as! ViewController
-            mainVC.names = self.names
-            mainVC.scores = self.scores
-
-        }
-    }
-    
     @IBAction func clickReset(button: UIButton){
         self.names = []
         self.scores = []
         tableView.reloadData()
+        self.reset = true
     }
-    
-    //only for editing?
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            names.remove(at: indexPath.row)
-//            scores.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-////            reloadScreen()
-//            }
-//    }
 
     /*
     // MARK: - Navigation
@@ -116,5 +90,26 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "leaderToMain"){
+            //TODO working on storing names and scores in app while it's on
+            let mainVC: ViewController = segue.destination as! ViewController
+            mainVC.names = self.names
+            mainVC.scores = self.scores
+//            mainVC.openDatabse()
+            if self.reset {
+                mainVC.needsReset = true
+            }
+            mainVC.firstTime = false
+            if let score = self.totalScore{
+                if let name = self.playerName{
+                    mainVC.nameToStore = name
+                    mainVC.scoreToStore = String(score)
+                }
+            }
+                
+            }
+    }
 
 }

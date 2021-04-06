@@ -8,6 +8,7 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import CoreData
 
 class GameViewController: UIViewController {
     
@@ -15,7 +16,6 @@ class GameViewController: UIViewController {
     var playerName: String!
     var score: Int?
     
-//    var leader: LeaderboardViewController?
     var names: [String]?
     var scores: [String]?
     
@@ -36,15 +36,6 @@ class GameViewController: UIViewController {
         }
 
     }
-    
-//    func getImageName(i: String) {
-//        self.hikerImageName = i
-//        print(self.hikerImageName)
-//    }
-//
-//    func passName(){
-//        return nDelegate?.getName(n: <#T##String#>)
-//    }
 
     override var shouldAutorotate: Bool {
         return true
@@ -61,39 +52,14 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
-//    @IBAction func unwind(sender: UIStoryboardSegue) {
-////        if let sourceViewController = sender.source as? MealViewController, let meal = sourceViewController.meal {
-////
-////            // Add a new meal.
-////            let newIndexPath = IndexPath(row: meals.count, section: 0)
-////
-////            meals.append(meal)
-////            tableView.insertRows(at: [newIndexPath], with: .automatic)
-//        //}
-//    }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let lead: LeaderboardViewController = segue.destination as! LeaderboardViewController
         lead.names = self.names ?? []
-        lead.scores = self.scores ?? [] 
-//        segue.destination = self.leader!
-//        if(segue.identifier == "gameToLeaderboard"){
-//            //lead.hikerImageName = hikerChoice
-//            lead.playerName = self.playerName
-            lead.playerName = self.playerName
-            lead.totalScore = self.score
-        //    gvc.iDelegate = self
-            
+        lead.scores = self.scores ?? []
+        lead.playerName = self.playerName
+        lead.totalScore = self.score
         }
-    
-//    prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-//        if([segue.identifier isEqualToString:@"mainToXerox"]){
-//            NSLog(@"xerox");
-//            SecondViewController *destinationVc = segue.destinationViewController;
-//            Connector *connectorClass = [[Connector alloc] init];
-//            connectorClass.isXerox = isXerox;
-//            destinationVc.connectorClass = connectorClass;
-//        }
+
 }
 

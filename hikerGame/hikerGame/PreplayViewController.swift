@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class PreplayViewController: UIViewController {
+class PreplayViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var nameField: UITextField!
     @IBOutlet var hiker1: UIButton!
@@ -20,82 +20,43 @@ class PreplayViewController: UIViewController {
     var hikerChoice: String!
     var name: String!
     
-//    var leader: LeaderboardViewController?
     var names: [String]?
     var scores: [String]?
     
-    //weak var iDelegate: imageDelegate?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
         //defaults
-        hikerChoice = "x"
+        hikerChoice = "Hiker1"
         name = "Anonymous"
+        self.nameField.delegate = self
     }
     
     @IBAction func clickedButton1(button: UIButton){
-        print("clicked hiker1 button")
-        //chose hiker image 1
-        hikerChoice = "hikerResize"
+        hikerChoice = "Hiker1"
     }
     
     @IBAction func clickedButton2(button: UIButton){
-        print("clicked hiker2 button")
-        //chose hiker image 1
-        hikerChoice = "hiker2"
+        hikerChoice = "Hiker2-1"
     }
     
     @IBAction func clickedButton3(button: UIButton){
-        print("clicked hiker3 button")
-        //chose hiker image 1
-        hikerChoice = "hiker3"
+        hikerChoice = "Hiker3size"
     }
     
     @IBAction func clickedButton4(button: UIButton){
-        print("clicked hiker4 button")
-        //chose hiker image 1
-        hikerChoice = "hiker4"
+        hikerChoice = "Hiker4size"
     }
     
-//    //delegate method
-//    func getImageName() {
-//        NSLog("idk what to put here")
-//    }
-    
-//    @IBAction func clickedPlay(button: UIButton){
-//        var nextVC = GameViewController()
-//        navigationController?.pushViewController(nextVC,
-//              animated: false)
-//
-//    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       // print("name is ", nameField.text)
-        if(segue.identifier == "preplayToGame"){
-            let gvc: GameViewController = segue.destination as! GameViewController
-            gvc.hikerImageName = hikerChoice
-            gvc.playerName = nameField.text
-//            gvc.leader = self.leader
-            gvc.names = self.names ?? []
-            gvc.scores = self.scores ?? []
-            //    gvc.iDelegate = self
-            
-        }
-//        if let nav = segue.destination as? UINavigationController, let gvc = nav.topViewController as? GameViewController {
-//            gvc.nDelegate = self
-//        }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
-    //    prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    //        if([segue.identifier isEqualToString:@"mainToXerox"]){
-    //            NSLog(@"xerox");
-    //            SecondViewController *destinationVc = segue.destinationViewController;
-    //            Connector *connectorClass = [[Connector alloc] init];
-    //            connectorClass.isXerox = isXerox;
-    //            destinationVc.connectorClass = connectorClass;
-    //        }
-
+    
+    func textFieldShouldReturn(textfield: UITextField) -> Bool {
+        textfield.resignFirstResponder()
+        return true
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -106,4 +67,14 @@ class PreplayViewController: UIViewController {
     }
     */
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "preplayToGame"){
+            let gvc: GameViewController = segue.destination as! GameViewController
+            gvc.hikerImageName = hikerChoice
+            gvc.playerName = nameField.text
+            gvc.names = self.names ?? []
+            gvc.scores = self.scores ?? []
+        }
+    }
+    
 }

@@ -53,9 +53,6 @@ class GameScene: SKScene {
     var sceneBottom: CGPoint!
 
     override func didMove(to view: SKView) {
-        
-
-        
         if(!content){
             contentOnScreen()
             content = true
@@ -74,18 +71,14 @@ class GameScene: SKScene {
     
     func makeTree(ofType tType: treeType) -> SKNode {
       // create a sprite (begins as a rectangle of specified color)
-//        var color = SKColor.green
         var treeImage = "liveResize"
         switch tType {
         case .dead:
-//            color = SKColor.lightGray
             treeImage = "deadTREE-1"
         case .live:
-//            color = SKColor.green
             treeImage = "liveResize"
         }
         let tree = SKSpriteNode(imageNamed: treeImage)
-       // let tree = SKSpriteNode(color: color, size: GameScene.treeType.size)
         tree.userData = NSMutableDictionary()
         switch tType { //store if live or dead in the node
         case .live:
@@ -99,7 +92,7 @@ class GameScene: SKScene {
     }
 
     func createTrees() {
-      //decide base origin, which is where to start spawning TODO move this to be global?
+        //decide base origin, which is where to start spawning
         self.viewTop = CGPoint(x:scene!.view!.center.x,y:scene!.view!.frame.minY)
         self.sceneTop = scene!.view!.convert(viewTop, to:scene!)
         self.nodeTop = scene!.convert(sceneTop,to:GameScene())
@@ -134,14 +127,13 @@ class GameScene: SKScene {
         self.viewBottom = CGPoint(x:scene!.view!.center.x,y:scene!.view!.frame.maxY)
         self.sceneBottom = scene!.view!.convert(self.viewBottom, to:scene!)
         self.nodeBottom = scene!.convert(self.sceneBottom,to:GameScene())
-      //put the hiker here ish
+        //put the hiker here ish
         hiker.position = CGPoint(x: self.nodeBottom.x, y: self.nodeBottom.y + 50)
       addChild(hiker)
         
     }
 
     func makeHiker() -> SKNode {
-     // let hiker = SKSpriteNode(color: SKColor.black, size: CGSize(width: 50, height: 50))
         let hikerImName = (self.viewController as! GameViewController).hikerImageName!
         let hiker = SKSpriteNode(imageNamed: hikerImName)
         hiker.name = kHikerName
@@ -151,13 +143,13 @@ class GameScene: SKScene {
         hiker.physicsBody!.isDynamic = true
         //not affected by gravity so it doesn't change in y value
         hiker.physicsBody!.affectedByGravity = false
-        //arbitrary mass so its movement is more natural
+        //arbitrary mass so its movement is more natural TODO maybe change this to fix movement
         hiker.physicsBody!.mass = 0.02
       return hiker
     }
     
     func setupLabels() {
-      //create score label TODO maybe score is time survived?
+      //create score label
         self.scoreLabel = SKLabelNode(fontNamed: "Courier")
         self.scoreLabel.name = "scoreLabel"
         self.scoreLabel.fontSize = 25
@@ -179,7 +171,6 @@ class GameScene: SKScene {
     func updateLabels(){
         self.scoreLabel.text = String(format: "Score: %04u", self.score)
         self.healthLabel.text = String(format: "Health: %04u", self.healthTracker)
-
     }
     
     func checkForCollisions(){
@@ -189,11 +180,12 @@ class GameScene: SKScene {
                 node.removeFromParent()
                 if(((node.userData?.value(forKey: "type"))) != nil){
                     //true so live
-                    self.healthTracker -= 1
+                    self.healthTracker -= 2
                     return
                 }
                 else{
-                    self.healthTracker -= 2
+                    //dead tree
+                    self.healthTracker -= 1
                     return
                 }
             }
@@ -203,12 +195,11 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         processUserMotion(forUpdate: currentTime)
-        
         checkForCollisions()
         
         var didCreate = false
         var gotPoints = false
-        //loop through trees TODO make normal loop
+        //loop through trees
         enumerateChildNodes(withName: treeType.name) { (node: SKNode, nil) in
             true; do {
             if(node.position.y == self.nodeTop.y - CGFloat(self.generationPoint) && !didCreate){
@@ -235,7 +226,6 @@ class GameScene: SKScene {
             //go to leaderboard
             self.viewController?.performSegue(withIdentifier: "gameToLeaderboard", sender: self)
         }
-        
     }
 
     func processUserMotion(forUpdate currentTime: CFTimeInterval) {

@@ -9,7 +9,6 @@ import UIKit
 
 class InstructionsViewController: UIViewController {
     
-//    var leader: LeaderboardViewController?
     var names: [String]?
     var scores: [String]?
     
@@ -17,15 +16,6 @@ class InstructionsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let prep: PreplayViewController = segue.destination as! PreplayViewController
-//        prep.leader = self.leader
-        prep.names = self.names ?? []
-        prep.scores = self.scores ?? []
-        
     }
 
     /*
@@ -37,5 +27,11 @@ class InstructionsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let prep: PreplayViewController = segue.destination as! PreplayViewController
+        prep.names = self.names ?? []
+        prep.scores = self.scores ?? []
+    }
 
 }

@@ -31,6 +31,7 @@
 		347D3BE8261B5520006A0CF9 /* Hiker3size.png in Resources */ = {isa = PBXBuildFile; fileRef = 347D3BE4261B5520006A0CF9 /* Hiker3size.png */; };
 		347D3BE9261B5520006A0CF9 /* Hiker1.png in Resources */ = {isa = PBXBuildFile; fileRef = 347D3BE5261B5520006A0CF9 /* Hiker1.png */; };
 		347D3BEA261B5520006A0CF9 /* Hiker4size.png in Resources */ = {isa = PBXBuildFile; fileRef = 347D3BE6261B5520006A0CF9 /* Hiker4size.png */; };
+		347D3C35261BFA5A006A0CF9 /* coreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 347D3C33261BFA5A006A0CF9 /* coreData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		347D3BE4261B5520006A0CF9 /* Hiker3size.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hiker3size.png; sourceTree = "<group>"; };
 		347D3BE5261B5520006A0CF9 /* Hiker1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Hiker1.png; path = ../../../../../../Downloads/Hiker1.png; sourceTree = "<group>"; };
 		347D3BE6261B5520006A0CF9 /* Hiker4size.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hiker4size.png; sourceTree = "<group>"; };
+		347D3C34261BFA5A006A0CF9 /* coreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coreData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				3471F43C2614FC510040A37C /* PreplayViewController.swift */,
 				3471F44126155D3F0040A37C /* ViewController.swift */,
 				345FAC08261AB13700AB9D57 /* InstructionsViewController.swift */,
+				347D3C33261BFA5A006A0CF9 /* coreData.xcdatamodeld */,
 				3471F4152614C2BF0040A37C /* hikerResize.png */,
 				345FABF4261AA42900AB9D57 /* hiker2.png */,
 				345FABF5261AA42900AB9D57 /* hiker3.png */,
@@ -318,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				347D3C35261BFA5A006A0CF9 /* coreData.xcdatamodeld in Sources */,
 				3471F44226155D3F0040A37C /* ViewController.swift in Sources */,
 				340CA3D8260B7FA9003513DF /* GameScene.swift in Sources */,
 				340CA3DA260B7FA9003513DF /* GameViewController.swift in Sources */,
@@ -649,6 +653,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		347D3C33261BFA5A006A0CF9 /* coreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				347D3C34261BFA5A006A0CF9 /* coreData.xcdatamodel */,
+			);
+			currentVersion = 347D3C34261BFA5A006A0CF9 /* coreData.xcdatamodel */;
+			path = coreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 340CA3C6260B7FA9003513DF /* Project object */;
 }
