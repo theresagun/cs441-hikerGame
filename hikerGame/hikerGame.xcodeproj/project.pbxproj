@@ -32,6 +32,8 @@
 		347D3BE9261B5520006A0CF9 /* Hiker1.png in Resources */ = {isa = PBXBuildFile; fileRef = 347D3BE5261B5520006A0CF9 /* Hiker1.png */; };
 		347D3BEA261B5520006A0CF9 /* Hiker4size.png in Resources */ = {isa = PBXBuildFile; fileRef = 347D3BE6261B5520006A0CF9 /* Hiker4size.png */; };
 		347D3C35261BFA5A006A0CF9 /* coreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 347D3C33261BFA5A006A0CF9 /* coreData.xcdatamodeld */; };
+		3499C7FB261D5B9B0010DEF4 /* pixel-heart-2779422_640.png in Resources */ = {isa = PBXBuildFile; fileRef = 3499C7FA261D5B9B0010DEF4 /* pixel-heart-2779422_640.png */; };
+		3499C800261D5D270010DEF4 /* pixelheart.png in Resources */ = {isa = PBXBuildFile; fileRef = 3499C7FF261D5D270010DEF4 /* pixelheart.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		347D3BE5261B5520006A0CF9 /* Hiker1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Hiker1.png; path = ../../../../../../Downloads/Hiker1.png; sourceTree = "<group>"; };
 		347D3BE6261B5520006A0CF9 /* Hiker4size.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hiker4size.png; sourceTree = "<group>"; };
 		347D3C34261BFA5A006A0CF9 /* coreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coreData.xcdatamodel; sourceTree = "<group>"; };
+		3499C7FA261D5B9B0010DEF4 /* pixel-heart-2779422_640.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pixel-heart-2779422_640.png"; sourceTree = "<group>"; };
+		3499C7FF261D5D270010DEF4 /* pixelheart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pixelheart.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,8 @@
 				345FABF6261AA42900AB9D57 /* hiker4.png */,
 				347D3BE5261B5520006A0CF9 /* Hiker1.png */,
 				347D3BE3261B5520006A0CF9 /* Hiker2.png */,
+				3499C7FA261D5B9B0010DEF4 /* pixel-heart-2779422_640.png */,
+				3499C7FF261D5D270010DEF4 /* pixelheart.png */,
 				347D3BE4261B5520006A0CF9 /* Hiker3size.png */,
 				347D3BE6261B5520006A0CF9 /* Hiker4size.png */,
 				3471F42C2614C7C20040A37C /* liveResize.png */,
@@ -284,12 +290,14 @@
 			files = (
 				340CA3DD260B7FA9003513DF /* Main.storyboard in Resources */,
 				347D3BE9261B5520006A0CF9 /* Hiker1.png in Resources */,
+				3499C800261D5D270010DEF4 /* pixelheart.png in Resources */,
 				347D3BE8261B5520006A0CF9 /* Hiker3size.png in Resources */,
 				345FABF8261AA42900AB9D57 /* hiker3.png in Resources */,
 				347D3BE7261B5520006A0CF9 /* Hiker2.png in Resources */,
 				345FABF9261AA42900AB9D57 /* hiker4.png in Resources */,
 				347D3BEA261B5520006A0CF9 /* Hiker4size.png in Resources */,
 				345FABF7261AA42900AB9D57 /* hiker2.png in Resources */,
+				3499C7FB261D5B9B0010DEF4 /* pixel-heart-2779422_640.png in Resources */,
 				3471F4282614C58A0040A37C /* deadTREE.png in Resources */,
 				3471F42D2614C7C20040A37C /* liveResize.png in Resources */,
 				3471F4162614C2BF0040A37C /* hikerResize.png in Resources */,

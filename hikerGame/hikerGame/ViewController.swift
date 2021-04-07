@@ -133,8 +133,8 @@ class ViewController: UIViewController {
                     print("scores exists")
                     if var nameList = self.names{
                         print("names exists")
-                        self.scores?.append(nameL as! String)
-                        self.names?.append(scoreL as! String)
+                        self.scores?.append(scoreL as! String)
+                        self.names?.append(nameL as! String)
                     }
                 }
                 else{

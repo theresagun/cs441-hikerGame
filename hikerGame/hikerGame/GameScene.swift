@@ -15,8 +15,10 @@ class GameScene: SKScene {
     //keep track of score & health at top in labels
     var scoreLabel: SKLabelNode!
     var healthLabel: SKLabelNode!
+    var highscoreLabel: SKLabelNode!
+    
     var score = 0
-    var healthTracker = 1
+    var healthTracker = 5
     
     var content = false
     //motion manager for tilting the device
@@ -163,14 +165,53 @@ class GameScene: SKScene {
         self.healthLabel.name = "healthLabel"
         self.healthLabel.fontSize = 25
         self.healthLabel.fontColor = SKColor.white
-        self.healthLabel.text = String(format: "Health: %f", 3)
+        self.healthLabel.text = String(format: "Health:")
         self.healthLabel.position = CGPoint(x: self.nodeTop.x - 150, y: self.nodeTop.y-100)
       addChild(healthLabel)
+        
+        for i in 1...5 {
+            let heart = SKSpriteNode(imageNamed: "pixelheart")
+            heart.position = CGPoint(x: self.nodeTop.x - CGFloat((50 + (5-i)*51)), y: self.nodeTop.y-130)
+            heart.name = "heart" + String(i)
+            addChild(heart)
+        }
+        
+        //create HIGHscore label
+          self.highscoreLabel = SKLabelNode(fontNamed: "Courier")
+          self.highscoreLabel.name = "highscoreLabel"
+          self.highscoreLabel.fontSize = 25
+          self.highscoreLabel.fontColor = SKColor.white
+        if let scoreList = (self.viewController as! GameViewController).scores{
+            if scoreList.count > 0{
+                self.highscoreLabel.text = "Highscore: " + scoreList[0]
+            }
+            else{
+                self.highscoreLabel.text = "Highscore: 0"
+
+            }
+        }
+        else{
+            self.highscoreLabel.text = "Highscore: 0"
+
+        }
+        
+          self.highscoreLabel.position = CGPoint(x: self.nodeTop.x + 150, y: self.nodeTop.y-130)
+        addChild(highscoreLabel)
     }
     
     func updateLabels(){
         self.scoreLabel.text = String(format: "Score: %04u", self.score)
-        self.healthLabel.text = String(format: "Health: %04u", self.healthTracker)
+//        self.healthLabel.text = String(format: "Health: %04u", self.healthTracker)
+    }
+    
+    func removeHeart(num: Int){
+        self.healthTracker -= 1
+        enumerateChildNodes(withName: "heart" + String(num)) { (node: SKNode, nil) in
+            true; do {
+                node.removeFromParent()
+            }
+            
+        }
     }
     
     func checkForCollisions(){
@@ -178,15 +219,18 @@ class GameScene: SKScene {
             if(node.intersects(self.childNode(withName: self.kHikerName)!)){
                 //if it intersects
                 node.removeFromParent()
-                if(((node.userData?.value(forKey: "type"))) != nil){
-                    //true so live
-                    self.healthTracker -= 2
-                    return
-                }
-                else{
-                    //dead tree
-                    self.healthTracker -= 1
-                    return
+                if let type = node.userData?.value(forKey: "type"){
+                    if type as! Bool == GameScene.treeType.t1 {
+                        //live tree
+                        self.removeHeart(num: self.healthTracker)
+                        self.removeHeart(num: self.healthTracker)
+                        return
+                    }
+                    else{
+                        //dead tree
+                        self.removeHeart(num: self.healthTracker)
+                        return
+                    }
                 }
             }
           }
@@ -202,7 +246,8 @@ class GameScene: SKScene {
         //loop through trees
         enumerateChildNodes(withName: treeType.name) { (node: SKNode, nil) in
             true; do {
-            if(node.position.y == self.nodeTop.y - CGFloat(self.generationPoint) && !didCreate){
+          //      if(node.position.y > self.nodeTop.y - CGFloat(self.generationPoint) - CGFloat(self.treeSpeed) && node.position.y < self.nodeTop.y - CGFloat(self.generationPoint) + CGFloat(self.treeSpeed) && !didCreate){
+                if(node.position.y == self.nodeTop.y - CGFloat(self.generationPoint) && !didCreate){
                 self.createTrees()
                 didCreate = true
             }
@@ -212,8 +257,15 @@ class GameScene: SKScene {
                 if(!gotPoints){
                     self.score += 1
                     gotPoints = true
+//                    if self.score % 5 == 0 {
+//                        self.treeSpeed += 1
+//                    }
+                    if self.score % 5 == 0 {
+                        self.generationPoint -= 25
+                    }
                 }
             }
+                
             node.position = CGPoint(x: node.position.x, y: node.position.y - CGFloat(self.treeSpeed))
           }
         }
