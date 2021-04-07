@@ -206,7 +206,6 @@ class GameScene: SKScene {
     
     func removeHeart(num: Int){
         self.healthTracker -= 1
-        print(self.healthTracker)
         enumerateChildNodes(withName: "heart" + String(num)) { (node: SKNode, nil) in
             true; do {
                 node.removeFromParent()

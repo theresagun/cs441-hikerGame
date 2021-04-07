@@ -30,12 +30,6 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
             if let name = self.playerName{
                 addToLeaderboard(n: name, s: score)
             }
-            else{
-                NSLog("invalid name")
-            }
-        }
-        else{
-            NSLog("invalid score")
         }
     }
     
@@ -70,7 +64,6 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         while((index < scores.count) && (Int(scores[index])! >= num)){
             index += 1
         }
-        NSLog("index to insert is ", index)
         return index;
     }
     

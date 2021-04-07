@@ -41,8 +41,6 @@ class ViewController: UIViewController {
     {
         context = appDelegate.persistentContainer.viewContext
         if self.needsReset{
-            //context.
-            NSLog("needs reset")
             resetAllRecords(in: "Entry")
         }
         if nameToStore != nil{
@@ -76,65 +74,35 @@ class ViewController: UIViewController {
 
         UserDBObj.setValue(nameToStore, forKey: "name")
         UserDBObj.setValue(scoreToStore, forKey: "score")
-        print("Storing Data..")
+//        print("Storing Data..")
         do {
             try context.save()
         } catch {
             print("Storing data Failed")
         }
-            
-        
-//        if let nList = self.names {
-//            if let sList = self.scores {
-//                var iter = 0
-//                for n in nList{
-//                    if needsStoring[iter] {
-//                        print("storing ",n)
-//                        if let s = self.scores?[iter]{
-//                            print("with score ",s)
-//                            UserDBObj.setValue(n, forKey: "name")
-//                            UserDBObj.setValue(s, forKey: "score")
-//                            iter += 1
-//
-//                            print("Storing Data..")
-//                            do {
-//                                try context.save()
-//                            } catch {
-//                                print("Storing data Failed")
-//                            }
-//                        }
-//                    }
-//                    else{
-//                        print("already stored")
-//                    }
-//                }
-//            }
-//        }
      }
 
      func fetchData()
      {
-         print("Fetching Data..")
+//         print("Fetching Data..")
          let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Entry")
          request.returnsObjectsAsFaults = false
          do {
             let result = try context.fetch(request)
-            print("length of result is ",result.count)
+//            print("length of result is ",result.count)
             var iter1 = 0
              for data in result as! [NSManagedObject] {
                 print(iter1)
                 iter1 += 1
                 let nameL = data.value(forKey: "name")
                 let scoreL = data.value(forKey: "score")
-                print("Retrieved: ",nameL,scoreL)
+//                print("Retrieved: ",nameL,scoreL)
 
                 if nameL == nil {
                     continue
                 }
                 if var scoreList = self.scores {
-                    print("scores exists")
                     if var nameList = self.names{
-                        print("names exists")
                         self.scores?.append(scoreL as! String)
                         self.names?.append(nameL as! String)
                     }

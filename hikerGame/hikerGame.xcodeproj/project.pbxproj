@@ -34,6 +34,8 @@
 		347D3C35261BFA5A006A0CF9 /* coreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 347D3C33261BFA5A006A0CF9 /* coreData.xcdatamodeld */; };
 		348D349C261DF65500DD6793 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 348D349B261DF65500DD6793 /* map.png */; };
 		348D34A4261DFAE300DD6793 /* map2.png in Resources */ = {isa = PBXBuildFile; fileRef = 348D34A3261DFAE300DD6793 /* map2.png */; };
+		348D34A9261E032200DD6793 /* danger ahead.png in Resources */ = {isa = PBXBuildFile; fileRef = 348D34A8261E032200DD6793 /* danger ahead.png */; };
+		348D34AE261E03AC00DD6793 /* fearless hiker.png in Resources */ = {isa = PBXBuildFile; fileRef = 348D34AD261E03AC00DD6793 /* fearless hiker.png */; };
 		3499C800261D5D270010DEF4 /* pixelheart.png in Resources */ = {isa = PBXBuildFile; fileRef = 3499C7FF261D5D270010DEF4 /* pixelheart.png */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +90,8 @@
 		347D3C34261BFA5A006A0CF9 /* coreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coreData.xcdatamodel; sourceTree = "<group>"; };
 		348D349B261DF65500DD6793 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		348D34A3261DFAE300DD6793 /* map2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map2.png; sourceTree = "<group>"; };
+		348D34A8261E032200DD6793 /* danger ahead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "danger ahead.png"; sourceTree = "<group>"; };
+		348D34AD261E03AC00DD6793 /* fearless hiker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fearless hiker.png"; sourceTree = "<group>"; };
 		3499C7FF261D5D270010DEF4 /* pixelheart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pixelheart.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +159,8 @@
 				345FABF5261AA42900AB9D57 /* hiker3.png */,
 				345FABF6261AA42900AB9D57 /* hiker4.png */,
 				347D3BE5261B5520006A0CF9 /* Hiker1.png */,
+				348D34A8261E032200DD6793 /* danger ahead.png */,
+				348D34AD261E03AC00DD6793 /* fearless hiker.png */,
 				347D3BE3261B5520006A0CF9 /* Hiker2.png */,
 				348D349B261DF65500DD6793 /* map.png */,
 				348D34A3261DFAE300DD6793 /* map2.png */,
@@ -300,10 +306,12 @@
 				347D3BE7261B5520006A0CF9 /* Hiker2.png in Resources */,
 				345FABF9261AA42900AB9D57 /* hiker4.png in Resources */,
 				347D3BEA261B5520006A0CF9 /* Hiker4size.png in Resources */,
+				348D34AE261E03AC00DD6793 /* fearless hiker.png in Resources */,
 				345FABF7261AA42900AB9D57 /* hiker2.png in Resources */,
 				3471F4282614C58A0040A37C /* deadTREE.png in Resources */,
 				348D34A4261DFAE300DD6793 /* map2.png in Resources */,
 				3471F42D2614C7C20040A37C /* liveResize.png in Resources */,
+				348D34A9261E032200DD6793 /* danger ahead.png in Resources */,
 				3471F4162614C2BF0040A37C /* hikerResize.png in Resources */,
 				340CA3D4260B7FA9003513DF /* GameScene.sks in Resources */,
 				340CA40D260B89E3003513DF /* hiker1.png in Resources */,
