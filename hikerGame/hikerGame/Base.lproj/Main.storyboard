@@ -151,7 +151,7 @@
                                 <rect key="frame" x="189" y="732" width="36" height="45"/>
                                 <state key="normal" title="PLAY"/>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="presentation" identifier="preplayToGame" id="MJP-8e-woe"/>
+                                    <segue destination="BV1-FR-VrT" kind="show" identifier="preplayToGame" id="MJP-8e-woe"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -343,8 +343,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lKU-W4-Sxr"/>
-        <segue reference="zA7-4v-6Hf"/>
+        <segue reference="MJP-8e-woe"/>
+        <segue reference="5Rf-Wk-2d5"/>
+        <segue reference="6XX-0B-bj4"/>
         <segue reference="xyp-23-qgd"/>
     </inferredMetricsTieBreakers>
     <resources>

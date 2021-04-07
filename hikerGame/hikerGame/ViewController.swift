@@ -28,6 +28,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationController?.isNavigationBarHidden = false
+        
         openDatabse()
         if self.firstTime{
             fetchData()

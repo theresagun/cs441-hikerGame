@@ -206,6 +206,7 @@ class GameScene: SKScene {
     
     func removeHeart(num: Int){
         self.healthTracker -= 1
+        print(self.healthTracker)
         enumerateChildNodes(withName: "heart" + String(num)) { (node: SKNode, nil) in
             true; do {
                 node.removeFromParent()
@@ -214,11 +215,37 @@ class GameScene: SKScene {
         }
     }
     
+    func makeMap(){
+        let baseOrigin = CGPoint(x: CGFloat(0), y: self.nodeTop.y)
+
+        let map = SKSpriteNode(imageNamed: "map2")
+        map.name = "map"
+        let rand = Int.random(in: (0-Int(self.nodeTop.x)) ... (2*Int(self.nodeTop.x)))
+        map.position = CGPoint(x: baseOrigin.x + CGFloat(rand), y: baseOrigin.y)
+        addChild(map)
+    }
+    
     func checkForCollisions(){
+        if let mNode = self.childNode(withName: "map"){
+            if let hNode = self.childNode(withName: self.kHikerName){
+                if(self.healthTracker < 5 && mNode.intersects(hNode)){
+                    mNode.removeFromParent()
+                    self.healthTracker += 1
+                    let heart = SKSpriteNode(imageNamed: "pixelheart")
+                    heart.position = CGPoint(x: self.nodeTop.x - CGFloat((50 + (5-self.healthTracker)*51)), y: self.nodeTop.y-130)
+                    heart.name = "heart" + String(self.healthTracker)
+                    addChild(heart)
+                }
+                else{
+                    mNode.position.y -= CGFloat(self.treeSpeed)
+                }
+            }
+        }
+        //check trees
         enumerateChildNodes(withName: treeType.name){ (node: SKNode, nil) in
             if(node.intersects(self.childNode(withName: self.kHikerName)!)){
-                //if it intersects
                 node.removeFromParent()
+                //if it intersects
                 if let type = node.userData?.value(forKey: "type"){
                     if type as! Bool == GameScene.treeType.t1 {
                         //live tree
@@ -246,7 +273,6 @@ class GameScene: SKScene {
         //loop through trees
         enumerateChildNodes(withName: treeType.name) { (node: SKNode, nil) in
             true; do {
-          //      if(node.position.y > self.nodeTop.y - CGFloat(self.generationPoint) - CGFloat(self.treeSpeed) && node.position.y < self.nodeTop.y - CGFloat(self.generationPoint) + CGFloat(self.treeSpeed) && !didCreate){
                 if(node.position.y == self.nodeTop.y - CGFloat(self.generationPoint) && !didCreate){
                 self.createTrees()
                 didCreate = true
@@ -257,9 +283,9 @@ class GameScene: SKScene {
                 if(!gotPoints){
                     self.score += 1
                     gotPoints = true
-//                    if self.score % 5 == 0 {
-//                        self.treeSpeed += 1
-//                    }
+                    if self.score % 10 == 0 {
+                        self.makeMap()
+                    }
                     if self.score % 5 == 0 {
                         self.generationPoint -= 25
                     }
